@@ -1,0 +1,103 @@
+.App {
+  position: relative;
+  text-align: center;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+}
+.table1 {
+  position: absolute;
+  left: 50px;
+  top: 50px;
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  background-color: lightgray;
+}
+.form-select {
+  width: 150px;
+  padding: 2px;
+}
+.forms {
+  margin: 30px auto;
+  display: flex;
+  flex-direction: column;
+}
+.table1 th {
+  width: 350px;
+}
+.table1 td {
+  width: 350px;
+}
+.update1 {
+  position: absolute;
+  left: 50px;
+  top: 50px;
+
+  width: 100%;
+  height: 70vh;
+  background-color: lightgray;
+}
+.update1 h1,
+h3 {
+  color: black;
+  padding-bottom: 30px;
+}
+.title {
+  position: absolute;
+  top: 50px;
+  left: 200px;
+  display: flex;
+  flex-direction: column;
+}
+.row1 {
+  position: absolute;
+  top: 250px;
+  left: 40px;
+  width: 800px;
+  text-align: center;
+}
+.submit123 {
+  position: absolute;
+  left: 400px;
+  top: 170px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: lightcyan;
+  font-weight: bolder;
+  padding: 2px;
+}
+.row2 {
+  position: absolute;
+  top: -130px;
+  left: 800px;
+  text-align: left;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding-bottom: 100px;
+  padding-top: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
+  font-size: medium;
+  row-gap: 10px;
+}
+.inputs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  z-index: 9999;
+}
+label {
+  font-weight: bold;
+}
+.loading {
+  position: absolute;
+  margin-left: 750px;
+  margin-top: 250px;
+}

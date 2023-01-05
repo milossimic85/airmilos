@@ -1,0 +1,215 @@
+.App {
+  position: relative;
+  text-align: center;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 98%;
+  height: 100vh;
+}
+.table1 {
+  position: absolute;
+  left: 50px;
+  top: 50px;
+  right: 50px;
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+}
+.form-select {
+  width: 150px;
+  padding: 2px;
+}
+.forms {
+  margin: 30px auto;
+  display: flex;
+  flex-direction: column;
+}
+.table1 th {
+  width: 250px;
+}
+.table1 td {
+  width: 250px;
+}
+.App button {
+  border: none;
+  background-color: transparent;
+}
+.buttons {
+  padding-bottom: 50px;
+  width: 500px;
+  max-width: 100%;
+  margin-left: 50px;
+  background-color: transparent;
+}
+.activebtn {
+  color: red;
+}
+.airportview {
+  position: absolute;
+  width: 102%;
+  height: 100vh;
+}
+.active {
+  opacity: 1;
+  z-index: 5;
+}
+.hidden {
+  opacity: 0;
+}
+
+.leaflet-container {
+  width: 98%;
+  height: 80vh;
+  position: relative;
+  opacity: 1;
+}
+.leaflet-popup .leaflet-popup-content-wrapper {
+  background-color: var(--color-dark--1);
+  color: var(--color-light--2);
+  border-radius: 5px;
+  padding-right: 0.6rem;
+}
+
+.leaflet-touch .leaflet-bar a {
+  width: 40px;
+  height: 30px;
+  border-radius: 5px;
+}
+.leaflet-container a {
+  padding-left: 0px;
+  padding-bottom: 30px;
+  padding-top: 5px;
+}
+.leaflet-container span {
+  margin-left: 2px;
+  margin-top: 5px;
+}
+
+.leaflet-popup .leaflet-popup-content {
+  font-size: 1.5rem;
+}
+.update {
+  position: absolute;
+  margin-top: 200px;
+
+  width: 100%;
+  height: 70vh;
+  background-color: lightgray;
+}
+.update h1,
+h3 {
+  color: black;
+  padding-bottom: 30px;
+}
+.title {
+  position: absolute;
+  top: -100px;
+  left: 200px;
+  display: flex;
+  flex-direction: column;
+}
+.row3 {
+  position: absolute;
+  top: -150px;
+  left: 800px;
+  text-align: right;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding-bottom: 100px;
+  padding-top: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
+  font-size: medium;
+}
+.label {
+  text-align: left;
+  font-size: larger;
+}
+.col3 {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 50px;
+}
+.submit12 {
+  position: absolute;
+  top: 345px;
+  left: 1300px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: lightcyan;
+  font-weight: bolder;
+  padding: 2px;
+}
+.title25 {
+  margin: 0 auto;
+}
+.error {
+  color: red;
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: 100%;
+  left: 30%;
+}
+.loading {
+  position: absolute;
+  margin-left: 750px;
+  margin-top: 250px;
+}
+
+.row4 {
+  position: absolute;
+  left: 130px;
+  top: 200px;
+}
+.new {
+  position: absolute;
+  background-color: lightgray;
+  width: 1580px;
+  height: 100vh;
+}
+.new h1 {
+  position: absolute;
+  left: 200px;
+  top: 100px;
+}
+.row5 {
+  position: absolute;
+  top: -150px;
+  left: 600px;
+  text-align: right;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border-radius: 5px;
+  padding-bottom: 100px;
+  padding-top: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
+  font-size: medium;
+}
+.submit1234 {
+  position: absolute;
+  left: 1100px;
+  top: 250px;
+  background-color: lightgray;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+.inputs {
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 50px;
+}
+.inputs input {
+  width: 200px;
+  border-radius: 2px;
+}

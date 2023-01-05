@@ -1,0 +1,28 @@
+.airplane {
+  color: gray;
+  animation: arrival 8s infinite;
+}
+@keyframes arrival {
+  0% {
+  }
+  40% {
+    transform: rotate(25deg) translateX(800px) translateY(100px) rotate(0deg);
+    opacity: 0.2;
+  }
+  45% {
+    opacity: 0;
+  }
+  55% {
+    transform: translateY(400px) translateX(1000px) rotateZ(-35deg);
+    opacity: 0.3;
+  }
+
+  100% {
+    transform: translateX(1600px);
+    opacity: 1;
+  }
+}
+.clock {
+  margin-left: 47.5%;
+  font-weight: bold;
+}
