@@ -8,6 +8,8 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { RxUpdate } from "react-icons/rx";
 import { FaTrash } from "react-icons/fa";
 import { Circles } from "react-loader-spinner";
+import Pagination from "../components/Pagination";
+import AirlinesPage from "./AirlinesPage";
 
 const AirportsPage = () => {
   const [airports, setAirports] = useState([]);
@@ -28,6 +30,9 @@ const AirportsPage = () => {
   const [val3, setVal3] = useState("");
   const [val4, setVal4] = useState("");
   const [val5, setVal5] = useState("");
+  const [currentPage, setCurrentPage] = useState("1");
+  const [airportperPage, setAirportperPage] = useState("5");
+  const [text, setText] = useState("");
 
   useEffect(() => {
     const fetchData = () => {
@@ -50,9 +55,10 @@ const AirportsPage = () => {
 
   const buttonHandler = async (e) => {
     console.log(e.target.value);
-    setAirpo(Number(e.target.value) + 1);
+    setAirpo(Number(e.target.value));
     document.getElementById("1").classList.remove("activebtn");
     document.getElementById("2").classList.add("activebtn");
+    document.getElementById("3").classList.remove("activebtn");
     document.getElementById("table").classList.remove("active");
     document.getElementById("table").classList.add("hidden");
     document.getElementById("airportview").classList.remove("hidden");
@@ -69,6 +75,8 @@ const AirportsPage = () => {
     document.getElementById("update").classList.add("hidden");
     document.getElementById("new").classList.remove("active");
     document.getElementById("new").classList.add("hidden");
+    document.getElementById("pagination").classList.remove("hidden");
+    document.getElementById("pagination").classList.add("active");
     setAirpo(null);
   };
   console.log(airpo);
@@ -77,7 +85,7 @@ const AirportsPage = () => {
 
   const updateHandler = (e) => {
     e.preventDefault();
-    setAirpos(Number(e.currentTarget.value) + 1);
+    setAirpos(Number(e.currentTarget.value));
 
     // for (let i = 0; i < select.options.length; i++) {
     //   option = select.options[i];
@@ -96,6 +104,8 @@ const AirportsPage = () => {
     document.getElementById("airportview").classList.add("hidden");
     document.getElementById("new").classList.add("hidden");
     document.getElementById("update").classList.remove("hidden");
+    document.getElementById("pagination").classList.remove("active");
+    document.getElementById("pagination").classList.add("hidden");
   };
   console.log(airpos);
   const airports3 = airports.filter((airport) => airport.id === airpos);
@@ -126,6 +136,8 @@ const AirportsPage = () => {
     document.getElementById("table").classList.add("active");
     document.getElementById("1").classList.add("activebtn");
     document.getElementById("4").classList.remove("activebtn");
+    document.getElementById("pagination").classList.remove("hidden");
+    document.getElementById("pagination").classList.add("active");
     document.getElementById("airports").value = val;
     document.getElementById("airports1").value = val1;
     document.getElementById("airports2").value = val2;
@@ -172,7 +184,7 @@ const AirportsPage = () => {
     console.log(e.currentTarget);
     // const taster = e.target.parentElement;
     // console.log(taster);
-    const id = Number(e.currentTarget.value) + 1;
+    const id = e.currentTarget.value;
     console.log(id);
     console.log(id);
     axios
@@ -183,16 +195,39 @@ const AirportsPage = () => {
   const newHandler = () => {
     document.getElementById("3").classList.add("activebtn");
     document.getElementById("1").classList.remove("activebtn");
+    document.getElementById("2").classList.remove("activebtn");
     document.getElementById("4").classList.remove("activebtn");
     document.getElementById("table").classList.remove("active");
     document.getElementById("table").classList.add("hidden");
+    document.getElementById("airportview").classList.remove("active");
+    document.getElementById("airportview").classList.add("hidden");
     document.getElementById("new").classList.remove("hidden");
     document.getElementById("new").classList.add("active");
+    setName("");
+    setCountry("");
+    setLatitude("");
+    setLongitude("");
   };
 
   const valueHandler = (e) => {
     e.target.children[0].removeAttribute("selected");
     e.target.children[1].setAttribute("selected", "true");
+  };
+  const indexOfLastPage = currentPage * airportperPage;
+  const indexOfFirstPage = indexOfLastPage - airportperPage;
+  const currentAirports = airports.filter((airport) => {
+    return text.toLowerCase() === ""
+      ? airport
+      : airport.name.toLowerCase().includes(text) ||
+          airport.country.toLowerCase().includes(text);
+  });
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const textHandler = (e) => {
+    e.preventDefault();
+    setText(e.target.value);
+    console.log(text);
   };
   return (
     <div className="App">
@@ -209,19 +244,26 @@ const AirportsPage = () => {
           />
         </div>
       )}
-      <div className="buttons">
-        <button id="1" className="activebtn" onClick={allhandler}>
-          Allairports
-        </button>
-        /
-        <button id="2" className="">
-          AirportView
-        </button>
-        /
-        <button id="3" onClick={newHandler}>
-          New Airport
-        </button>
-        /<button id="4">Update</button>
+      <div className="buttons1">
+        <div>
+          <button id="1" className="activebtn" onClick={allhandler}>
+            Allairports
+          </button>
+          /
+          <button id="2" className="">
+            AirportView
+          </button>
+          /
+          <button id="3" onClick={newHandler}>
+            New Airport
+          </button>
+          /<button id="4">Update</button>
+        </div>
+        <div className="inp active">
+          <label>Search:</label>
+          <span> </span>
+          <input type="text" value={text} onChange={textHandler}></input>
+        </div>
       </div>
       <div className="table1">
         <table className="table table-striped active" id="table">
@@ -239,40 +281,49 @@ const AirportsPage = () => {
             </tr>
           </thead>
           <tbody>
-            {airports.map((airport, id) => (
-              <tr>
-                <th scope="row">{id + 1}</th>
-                <td>
-                  <button key={id} onClick={buttonHandler} value={id}>
-                    {airport.name}
-                  </button>
-                </td>
-                <td>{airport.country}</td>
-                <td>
-                  {airport.latitude}, {airport.longitude}
-                </td>
-                <td>{airport.destinationJat}</td>
-                <td>{airport.destinationLufthansa}</td>
-                <td>{airport.destinationViennaAirlines}</td>
-                <td>
-                  <button key={id} onClick={deleteHandler} value={id}>
-                    <FaTrash></FaTrash>
-                  </button>
-                </td>
-                <td>
-                  <button
-                    key={id}
-                    className=""
-                    onClick={updateHandler}
-                    value={id}
-                  >
-                    <RxUpdate></RxUpdate>
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {currentAirports
+              .map((airport, id) => (
+                <tr>
+                  <th scope="row">{id + 1}</th>
+                  <td>
+                    <button key={id} onClick={buttonHandler} value={airport.id}>
+                      {airport.name}
+                    </button>
+                  </td>
+                  <td>{airport.country}</td>
+                  <td>
+                    {airport.latitude}, {airport.longitude}
+                  </td>
+                  <td>{airport.destinationJat}</td>
+                  <td>{airport.destinationLufthansa}</td>
+                  <td>{airport.destinationViennaAirlines}</td>
+                  <td>
+                    <button key={id} onClick={deleteHandler} value={airport.id}>
+                      <FaTrash></FaTrash>
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      key={id}
+                      className=""
+                      onClick={updateHandler}
+                      value={airport.id}
+                    >
+                      <RxUpdate></RxUpdate>
+                    </button>
+                  </td>
+                </tr>
+              ))
+              .slice(indexOfFirstPage, indexOfLastPage)}
           </tbody>
         </table>
+        <div className="pagination active" id="pagination">
+          <Pagination
+            postsPerPage={airportperPage}
+            totalPosts={currentAirports.length}
+            paginate={paginate}
+          ></Pagination>
+        </div>
 
         <div className="airportview hidden" id="airportview">
           {airports2.map((airport) => (
@@ -342,7 +393,9 @@ const AirportsPage = () => {
                 ></input>
               </div>
               <div className="row5">
-                <div className="title25">Airlines Destination</div>
+                <div className="title25">
+                  <h3>Airlines Destination</h3>
+                </div>
                 <div className="col3">
                   <div className="label">
                     <label for="airports">

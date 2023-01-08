@@ -4,6 +4,7 @@ import { FaTrash } from "react-icons/fa";
 import { RxUpdate } from "react-icons/rx";
 import "./Airlines.css";
 import { Circles } from "react-loader-spinner";
+import Pagination from "../components/Pagination";
 
 const AirlinesPage = () => {
   const [airlines, setAirlines] = useState([]);
@@ -12,6 +13,8 @@ const AirlinesPage = () => {
   const [country, setCountry] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState("1");
+  const [airportperPage, setAirportperPage] = useState("5");
 
   useEffect(() => {
     setLoading(true);
@@ -48,7 +51,7 @@ const AirlinesPage = () => {
   const updateHandler = (e) => {
     e.preventDefault();
     console.log("click");
-    setAirlin(Number(e.currentTarget.value) + 1);
+    setAirlin(Number(e.currentTarget.value));
     // setAirpos(Number(e.target.value) + 1);
     document.getElementById("1").classList.remove("activebtn");
     document.getElementById("3").classList.add("activebtn");
@@ -57,6 +60,8 @@ const AirlinesPage = () => {
     document.getElementById("update1").classList.remove("hidden");
     document.querySelector(".table1").classList.add("hidden");
     document.querySelector(".table1").classList.remove("active");
+    document.querySelector(".pagination").classList.remove("active");
+    document.querySelector(".pagination").classList.add("hidden");
   };
   console.log(airlin);
   const airlines3 = airlines.filter((airline) => airline.id === airlin);
@@ -68,6 +73,8 @@ const AirlinesPage = () => {
     document.getElementById("table").classList.remove("hidden");
     document.getElementById("update1").classList.add("hidden");
     document.querySelector(".table1").classList.remove("hidden");
+    document.querySelector(".pagination").classList.add("active");
+    document.querySelector(".pagination").classList.remove("hidden");
   };
 
   const airhandler = (e) => {
@@ -97,10 +104,18 @@ const AirlinesPage = () => {
     document.getElementById("3").classList.remove("activebtn");
     document.querySelector(".table1").classList.remove("hidden");
     document.querySelector(".table1").classList.add("active");
+    document.querySelector(".pagination").classList.add("active");
+    document.querySelector(".pagination").classList.remove("hidden");
     setAirlin(null);
     setAirline("");
     setCountry("");
   };
+
+  const indexOfLastPage = currentPage * airportperPage;
+  const indexOfFirstPage = indexOfLastPage - airportperPage;
+  const currentAirports = airlines.slice(indexOfFirstPage, indexOfLastPage);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div className="App">
@@ -135,11 +150,11 @@ const AirlinesPage = () => {
             </tr>
           </thead>
           <tbody>
-            {airlines.map((airlines, id) => (
+            {currentAirports.map((airlines, id) => (
               <tr>
                 <th scope="row">{id + 1}</th>
                 <td>
-                  <button key={id} onClick={() => {}} value={id}>
+                  <button key={id} onClick={() => {}} value={airlines.id}>
                     {airlines.name}
                   </button>
                 </td>
@@ -154,7 +169,7 @@ const AirlinesPage = () => {
                     key={id}
                     className=""
                     onClick={updateHandler}
-                    value={id}
+                    value={airlines.id}
                   >
                     <RxUpdate></RxUpdate>
                   </button>
@@ -164,10 +179,17 @@ const AirlinesPage = () => {
           </tbody>
         </table>
       </div>
+      <div className="pagination active">
+        <Pagination
+          postsPerPage={airportperPage}
+          totalPosts={airlines.length}
+          paginate={paginate}
+        ></Pagination>
+      </div>
       <div className="update1 hidden" id="update1">
         {airlines3.map((airline) => (
-          <div className="row1">
-            <div className="title">
+          <div className="row6">
+            <div className="title12">
               <div>
                 <h1>{airline.name}</h1>
               </div>

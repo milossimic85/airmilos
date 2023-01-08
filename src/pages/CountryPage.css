@@ -8,3 +8,9 @@
   margin-left: 750px;
   margin-top: 250px;
 }
+.buttons {
+  padding-bottom: 50px;
+  width: 200px;
+  margin-left: 100px;
+  background-color: transparent;
+}

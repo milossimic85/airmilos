@@ -45,24 +45,24 @@ h3 {
   color: black;
   padding-bottom: 30px;
 }
-.title {
+.title12 {
   position: absolute;
-  top: 50px;
+  top: -280px;
   left: 200px;
   display: flex;
   flex-direction: column;
 }
-.row1 {
+.row6 {
   position: absolute;
-  top: 250px;
+  top: 450px;
   left: 40px;
   width: 800px;
   text-align: center;
 }
 .submit123 {
   position: absolute;
-  left: 400px;
-  top: 170px;
+  left: 580px;
+  top: 200px;
   border: 1px solid black;
   border-radius: 5px;
   background-color: lightcyan;
@@ -71,10 +71,10 @@ h3 {
 }
 .row2 {
   position: absolute;
-  top: -130px;
-  left: 800px;
+  top: -350px;
+  left: 700px;
   text-align: left;
-  width: 500px;
+  width: 700px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -100,4 +100,15 @@ label {
   position: absolute;
   margin-left: 750px;
   margin-top: 250px;
+}
+.pagination {
+  position: absolute;
+  top: -250px;
+  left: -400px;
+}
+.buttons {
+  padding-bottom: 50px;
+  width: 200px;
+  margin-left: 100px;
+  background-color: transparent;
 }
